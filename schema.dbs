@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="db.txt" id="Project-3dc" database="Sqlite" >
+	<schema name="public" >
+		<table name="inventory_stock" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="name" type="VARCHAR" length="30" jt="12" mandatory="y" />
+			<column name="quantity" type="INTEGER" jt="4" mandatory="y" />
+			<column name="is_deleted" type="BOOLEAN" jt="-7" mandatory="y" />
+			<index name="unq_inventory_stock_name" unique="UNIQUE_KEY" >
+				<column name="name" />
+			</index>
+			<index name="pk_inventory_stock" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+		</table>
+		<table name="transactions_purchasebill" spec="" >
+			<column name="billno" type="INTEGER" jt="4" mandatory="y" />
+			<column name="time" type="DATETIME" jt="93" mandatory="y" />
+			<column name="supplier_id" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_transactions_purchasebill" unique="PRIMARY_KEY" >
+				<column name="billno" options=" AUTOINCREMENT" />
+			</index>
+			<fk name="FK_transactions_purchasebill transactions_supplier" to_schema="public" to_table="transactions_supplier" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="supplier_id" pk="id" />
+			</fk>
+		</table>
+		<table name="transactions_purchasebilldetails" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="eway" type="VARCHAR" length="50" jt="12" />
+			<column name="veh" type="VARCHAR" length="50" jt="12" />
+			<column name="destination" type="VARCHAR" length="50" jt="12" />
+			<column name="po" type="VARCHAR" length="50" jt="12" />
+			<column name="cgst" type="VARCHAR" length="50" jt="12" />
+			<column name="sgst" type="VARCHAR" length="50" jt="12" />
+			<column name="igst" type="VARCHAR" length="50" jt="12" />
+			<column name="cess" type="VARCHAR" length="50" jt="12" />
+			<column name="tcs" type="VARCHAR" length="50" jt="12" />
+			<column name="total" type="VARCHAR" length="50" jt="12" />
+			<column name="billno_id" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_transactions_purchasebilldetails" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+			<fk name="FK_transactions_purchasebilldetails transactions_purchasebill" to_schema="public" to_table="transactions_purchasebill" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="billno_id" pk="billno" />
+			</fk>
+		</table>
+		<table name="transactions_purchaseitem" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="quantity" type="INTEGER" jt="4" mandatory="y" />
+			<column name="perprice" type="INTEGER" jt="4" mandatory="y" />
+			<column name="totalprice" type="INTEGER" jt="4" mandatory="y" />
+			<column name="billno_id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="stock_id" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_transactions_purchaseitem" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+			<fk name="FK_transactions_purchaseitem transactions_purchasebill" to_schema="public" to_table="transactions_purchasebill" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="billno_id" pk="billno" />
+			</fk>
+			<fk name="FK_transactions_purchaseitem inventory_stock" to_schema="public" to_table="inventory_stock" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="stock_id" pk="id" />
+			</fk>
+		</table>
+		<table name="transactions_salebill" spec="" >
+			<column name="billno" type="INTEGER" jt="4" mandatory="y" />
+			<column name="time" type="DATETIME" jt="93" mandatory="y" />
+			<column name="name" type="VARCHAR" length="150" jt="12" mandatory="y" />
+			<column name="phone" type="VARCHAR" length="12" jt="12" mandatory="y" />
+			<column name="address" type="VARCHAR" length="200" jt="12" mandatory="y" />
+			<column name="email" type="VARCHAR" length="254" jt="12" mandatory="y" />
+			<column name="gstin" type="VARCHAR" length="15" jt="12" mandatory="y" />
+			<index name="pk_transactions_salebill" unique="PRIMARY_KEY" >
+				<column name="billno" options=" AUTOINCREMENT" />
+			</index>
+		</table>
+		<table name="transactions_salebilldetails" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="eway" type="VARCHAR" length="50" jt="12" />
+			<column name="veh" type="VARCHAR" length="50" jt="12" />
+			<column name="destination" type="VARCHAR" length="50" jt="12" />
+			<column name="po" type="VARCHAR" length="50" jt="12" />
+			<column name="cgst" type="VARCHAR" length="50" jt="12" />
+			<column name="sgst" type="VARCHAR" length="50" jt="12" />
+			<column name="igst" type="VARCHAR" length="50" jt="12" />
+			<column name="cess" type="VARCHAR" length="50" jt="12" />
+			<column name="tcs" type="VARCHAR" length="50" jt="12" />
+			<column name="total" type="VARCHAR" length="50" jt="12" />
+			<column name="billno_id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="eway" type="VARCHAR" length="50" jt="12" />
+			<column name="veh" type="VARCHAR" length="50" jt="12" />
+			<column name="destination" type="VARCHAR" length="50" jt="12" />
+			<column name="po" type="VARCHAR" length="50" jt="12" />
+			<column name="cgst" type="VARCHAR" length="50" jt="12" />
+			<column name="sgst" type="VARCHAR" length="50" jt="12" />
+			<column name="igst" type="VARCHAR" length="50" jt="12" />
+			<column name="cess" type="VARCHAR" length="50" jt="12" />
+			<column name="tcs" type="VARCHAR" length="50" jt="12" />
+			<column name="total" type="VARCHAR" length="50" jt="12" />
+			<column name="billno_id" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_transactions_salebilldetails" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+			<index name="pk_transactions_salebilldetails_0" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+			<fk name="FK_transactions_salebilldetails transactions_salebill" to_schema="public" to_table="transactions_salebill" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="billno_id" pk="billno" />
+			</fk>
+			<fk name="FK_transactions_salebilldetails transactions_salebill_001" to_schema="public" to_table="transactions_salebill" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="billno_id" pk="billno" />
+			</fk>
+		</table>
+		<table name="transactions_saleitem" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="quantity" type="INTEGER" jt="4" mandatory="y" />
+			<column name="perprice" type="INTEGER" jt="4" mandatory="y" />
+			<column name="totalprice" type="INTEGER" jt="4" mandatory="y" />
+			<column name="billno_id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="stock_id" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_transactions_saleitem" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+			<fk name="FK_transactions_saleitem transactions_salebill" to_schema="public" to_table="transactions_salebill" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="billno_id" pk="billno" />
+			</fk>
+			<fk name="FK_transactions_saleitem inventory_stock" to_schema="public" to_table="inventory_stock" options="DEFERRABLE INITIALLY DEFERRED" >
+				<fk_column name="stock_id" pk="id" />
+			</fk>
+		</table>
+		<table name="transactions_supplier" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" />
+			<column name="name" type="VARCHAR" length="150" jt="12" mandatory="y" />
+			<column name="phone" type="VARCHAR" length="12" jt="12" mandatory="y" />
+			<column name="address" type="VARCHAR" length="200" jt="12" mandatory="y" />
+			<column name="email" type="VARCHAR" length="254" jt="12" mandatory="y" />
+			<column name="gstin" type="VARCHAR" length="15" jt="12" mandatory="y" />
+			<column name="is_deleted" type="BOOLEAN" jt="-7" mandatory="y" />
+			<index name="unq_transactions_supplier_phone" unique="UNIQUE_KEY" >
+				<column name="phone" />
+			</index>
+			<index name="unq_transactions_supplier_email" unique="UNIQUE_KEY" >
+				<column name="email" />
+			</index>
+			<index name="unq_transactions_supplier_gstin" unique="UNIQUE_KEY" >
+				<column name="gstin" />
+			</index>
+			<index name="pk_transactions_supplier" unique="PRIMARY_KEY" >
+				<column name="id" options=" AUTOINCREMENT" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Layout" id="Layout-1005" show_relation="columns" >
+		<entity schema="public" name="inventory_stock" color="BED3F4" x="64" y="48" />
+		<entity schema="public" name="transactions_purchasebill" color="BED3F4" x="48" y="448" />
+		<entity schema="public" name="transactions_purchasebilldetails" color="BED3F4" x="48" y="608" />
+		<entity schema="public" name="transactions_purchaseitem" color="BED3F4" x="48" y="256" />
+		<entity schema="public" name="transactions_salebill" color="BED3F4" x="512" y="256" />
+		<entity schema="public" name="transactions_salebilldetails" color="BED3F4" x="848" y="96" />
+		<entity schema="public" name="transactions_saleitem" color="BED3F4" x="512" y="80" />
+		<entity schema="public" name="transactions_supplier" color="BED3F4" x="608" y="512" />
+		<script name="transactions_salebilldetails" id="Editor-1490" language="SQL" >
+			<string><![CDATA[SELECT id, eway, veh, destination, po, cgst, sgst, igst, cess, tcs, total, billno_id, id, eway, veh, destination, po, cgst, 
+	sgst, igst, cess, tcs, total, billno_id
+FROM
+	transactions_salebilldetails s;]]></string>
+		</script>
+		<form name="Report" id="Report-5ad" template="Page" css="container-fluid" view="frame" >
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2},{-2}}" scroll="n" html="n" />
+		</form>
+	</layout>
+</project>
